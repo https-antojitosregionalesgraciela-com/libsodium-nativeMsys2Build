@@ -14,7 +14,7 @@ jobs:
       MSYSTEM: ${{ matrix.system }}
     steps:
       - uses: actions/checkout@v3
-      - uses: ElNounch/ramdrive@efc33aee02595460c716571f9181760cbbbe2dbf
+      - uses: ElNounch/ramdrive
       - shell: powershell
         run: |
             Set-Location "R:\"
