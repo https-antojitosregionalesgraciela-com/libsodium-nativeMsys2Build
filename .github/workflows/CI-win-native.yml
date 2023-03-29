@@ -1,6 +1,6 @@
 on:
   push:
-    branches:
+#    branches:
 #      - stable
 #      - next
 
@@ -10,12 +10,12 @@ jobs:
     strategy:
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
+    env:
+      MSYSTEM: ${{ matrix.system }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/ramdrive@1
       - shell: powershell
-        environment:
-          MSYSTEM: ${{ matrix.system }}
         run: |
             Set-Location R:\
             Start-BitsTransfer 'https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe' "msys2-x86_64-latest.sfx.exe"
