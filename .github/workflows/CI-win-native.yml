@@ -19,7 +19,6 @@ jobs:
         run: |
             Set-Location R:\
             Start-BitsTransfer 'https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe' "msys2-x86_64-latest.sfx.exe"
-#           & "R:\msys2-x86_64-latest.sfx.exe" -o"R:\" -y 
             & "msys2-x86_64-latest.sfx.exe" -y 
             Remove-Item "msys2-x86_64-latest.sfx.exe"
             $LASTEXITCODE=-1
