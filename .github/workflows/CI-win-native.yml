@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+#      - stable
+#      - next
+
+jobs:
+  native-build-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        system: [ 'UCRT64', 'MINGW64' ]
+    steps:
+      - uses: actions/checkout@v3
+	  - uses: actions/ramdrive@1
+	  - shell: powershell
+		environment:
+		  MSYSTEM: ${{ matrix.system }}
+		run: |
+			Set-Location R:\
+			Start-BitsTransfer 'https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe' "msys2-x86_64-latest.sfx.exe"
+#			& "R:\msys2-x86_64-latest.sfx.exe" -o"R:\" -y 
+			& "msys2-x86_64-latest.sfx.exe" -y 
+			Remove-Item "msys2-x86_64-latest.sfx.exe"
+			$LASTEXITCODE=-1
+			while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start" "-c 'true'" }
