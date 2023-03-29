@@ -1,0 +1,27 @@
+on:
+  push:
+#    branches:
+#      - stable
+#      - next
+
+env:
+  MSYS2_NOSTART: "yes"
+jobs:
+  native-build-windows:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [ 'UCRT64', 'MINGW64' ]
+    steps:
+      - uses: ElNounch/ramdrive@v1
+      - uses: ElNounch/msys2-setup-action@v1
+        with:
+          msystem: ${{ matrix.system }}
+          location: "R:"
+          update: true
+          install: autoconf
+      - uses: actions/checkout@v3
+      - name: CI-Build
+        run: |
+          
