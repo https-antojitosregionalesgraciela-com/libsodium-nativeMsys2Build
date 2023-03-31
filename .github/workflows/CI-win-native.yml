@@ -15,11 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ElNounch/ramdrive@v1
-      - shell: powershell
+      - name: 'msys2-setup'
+        shell: powershell
         run: |
           Set-Location "R:\"
           Start-BitsTransfer "https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe" "R:\msys2-x86_64-latest.sfx.exe"
           & "R:\msys2-x86_64-latest.sfx.exe" -y
           Remove-Item "msys2-x86_64-latest.sfx.exe"
           $LASTEXITCODE=-1
-          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c 'true'" }
+          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""true""" }
