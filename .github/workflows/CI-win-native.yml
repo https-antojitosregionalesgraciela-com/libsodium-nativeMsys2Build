@@ -19,7 +19,7 @@ jobs:
         shell: powershell
         run: |
           Start-BitsTransfer "https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe" "R:\msys2-x86_64-latest.sfx.exe"
-          "R:\msys2-x86_64-latest.sfx.exe" -y -oR:\
+          & "R:\msys2-x86_64-latest.sfx.exe" -y -oR:\
           Remove-Item "R:\msys2-x86_64-latest.sfx.exe"
       - name: msys2 - setup
         shell: powershell
