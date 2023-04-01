@@ -23,25 +23,23 @@ jobs:
       - name: msys2 - unzip & first launch
         shell: cmd
         run: |
+          @echo off
           "R:\msys2-x86_64-latest.sfx.exe" -y -oR:\
           del "R:\msys2-x86_64-latest.sfx.exe"
           "R:\msys64\msys2_shell.cmd" -no-start
       - name: msys2 - update base
-        shell: powershell
+        shell: cmd
         run: |
           @echo off
           :Loop
-          $LASTEXITCODE = -1
-          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime""" }
-
+          "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman -Sy && pacman --needed -S bash pacman pacman-mirrors msys2-runtime"""
+          if ERRORLEVEL 1 GoTo Loop
       - name: msys2 update package database
         shell: msys2 {0}
         run: pacman -Sy
       - name: msys2 - update base
-        shell: cmd
-        run: |
-          "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime"""
-          
+        shell: msys2 {0}
+        run: pacman --needed -S bash pacman pacman-mirrors msys2-runtime
       - name: msys2 - install required packages
         shell: msys2 {0}
         run: |
