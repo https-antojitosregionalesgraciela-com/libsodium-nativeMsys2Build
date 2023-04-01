@@ -22,7 +22,7 @@ jobs:
           Start-BitsTransfer "https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe" "R:\msys2-x86_64-latest.sfx.exe"
           & "R:\msys2-x86_64-latest.sfx.exe" -y -oR:\
           Remove-Item "R:\msys2-x86_64-latest.sfx.exe"
-      - name: msys2 - setup
+      - name: msys2 - first launch / initial setup
         run: R:\msys64\msys2_shell.cmd -no-start
       - name: msys2 - update base
         shell: powershell
@@ -41,5 +41,5 @@ jobs:
           while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime""" }
       - name: msys2 - install required packages
         shell: msys2 {0}
-        run: pacman -S --needed gcc
-}
+        run: |
+          pacman -S --needed gcc
