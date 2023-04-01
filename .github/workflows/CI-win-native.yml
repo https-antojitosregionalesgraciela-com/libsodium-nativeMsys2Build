@@ -16,17 +16,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ElNounch/ramdrive@v1
-      - name: msys2 - unzip
+      - name: msys2 - download
         shell: powershell
         run: |
           Start-BitsTransfer "https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe" "R:\msys2-x86_64-latest.sfx.exe"
-          & "R:\msys2-x86_64-latest.sfx.exe" -y -oR:\
-          Remove-Item "R:\msys2-x86_64-latest.sfx.exe"
-      - name: msys2 - first launch / initial setup
-        run: R:\msys64\msys2_shell.cmd -no-start
+      - name: msys2 - unzip & first launch
+        shell: cmd
+        run: |
+          "R:\msys2-x86_64-latest.sfx.exe" -y -oR:\
+          del "R:\msys2-x86_64-latest.sfx.exe"
+          "R:\msys64\msys2_shell.cmd" -no-start
       - name: msys2 - update base
         shell: powershell
         run: |
+          @echo off
+          :Loop
           $LASTEXITCODE = -1
           while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime""" }
 
@@ -36,8 +40,6 @@ jobs:
       - name: msys2 - update base
         shell: cmd
         run: |
-          @echo off
-          :Loop
           "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime"""
           
       - name: msys2 - install required packages
