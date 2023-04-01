@@ -19,7 +19,7 @@ jobs:
       - name: msys2 - download
         shell: powershell
         run: |
-          Start-BitsTransfer ""
+          Start-BitsTransfer "https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe" "R:\msys2-x86_64-latest.sfx.exe"
       - name: msys2 - unzip & first launch
         shell: cmd
         run: |
