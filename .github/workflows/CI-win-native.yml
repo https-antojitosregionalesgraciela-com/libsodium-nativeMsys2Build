@@ -8,6 +8,7 @@ jobs:
   native-build-windows:
     runs-on: windows-latest
     strategy:
+     fail-fast: $false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
     env:
@@ -23,9 +24,16 @@ jobs:
           Remove-Item "R:\msys2-x86_64-latest.sfx.exe"
       - name: msys2 - setup
         run: R:\msys64\msys2_shell.cmd -no-start
+      - name: msys2 - update base
+        shell: powershell
+        run: |
+          $LASTEXITCODE = -1
+          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime""" }
+
       - name: msys2 update package database
         shell: msys2 {0}
         run: pacman -Sy
+        @echo off 
       - name: msys2 - update base
         shell: powershell
         run: |
@@ -34,3 +42,4 @@ jobs:
       - name: msys2 - install required packages
         shell: msys2 {0}
         run: pacman -S --needed gcc
+}
