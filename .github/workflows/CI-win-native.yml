@@ -34,11 +34,12 @@ jobs:
         shell: msys2 {0}
         run: pacman -Sy
       - name: msys2 - update base
-        shell: powershell
+        shell: cmd
         run: |
-          @echo off 
-          $LASTEXITCODE = -1
-          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime""" }
+          @echo off
+          :Loop
+          "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime"""
+          
       - name: msys2 - install required packages
         shell: msys2 {0}
         run: |
