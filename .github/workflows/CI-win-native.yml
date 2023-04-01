@@ -23,6 +23,15 @@ jobs:
           Remove-Item "R:\msys2-x86_64-latest.sfx.exe"
       - name: msys2 - setup
         shell: powershell
+        run: & "R:\msys64\msys2_shell.cmd" "-no-start"
+      - name: msys2 - update package database
+        shell: msys2
+        run: pacman -Sy
+      - name: msys2 - update base
+        shell: powershell
         run: |
-          $LASTEXITCODE=-1
-          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""true""" }
+          $LASTEXITCODE = -1
+          while ($LASTEXITCODE -ne 0) { & "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman --needed -S bash pacman pacman-mirrors msys2-runtime""" }
+      - name: msys2 - install required packages
+        shell: msys2
+        run: pacman -S --needed gcc
