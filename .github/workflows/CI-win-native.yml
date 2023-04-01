@@ -19,7 +19,7 @@ jobs:
       - name: msys2 - download
         shell: powershell
         run: |
-          Start-BitsTransfer "https://repo.msys2.org/distrib/msys2-x86_64-latest.sfx.exe" "R:\msys2-x86_64-latest.sfx.exe"
+          Start-BitsTransfer ""
       - name: msys2 - unzip & first launch
         shell: cmd
         run: |
@@ -28,7 +28,8 @@ jobs:
           del "R:\msys2-x86_64-latest.sfx.exe"
           "R:\msys64\msys2_shell.cmd" -no-start
           echo "R:\msys64\bin" >> $GITHUB_PATH
-      - name: msys2 - update base
+          echo "R:\msys64\bin" >> $GITHUB_PATH
+      - name: msys2 - update base "/usr/bin"
         shell: cmd
         run: |
           @echo off
