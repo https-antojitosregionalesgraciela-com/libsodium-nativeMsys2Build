@@ -14,13 +14,11 @@ jobs:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
-    env:
-      MSYSTEM: ${{ matrix.system }}
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: ${{ matrix.os }}
+          msystem: ${{ matrix.system }}
           location: "R:"
           update: true
           install: git mingw-w64-ucrt-x86_64-gcc
