@@ -15,7 +15,7 @@ jobs:
         system: [ 'UCRT64', 'MINGW64' ]
     steps:
       - uses: ElNounch/ramdrive@v1
-      - uses: msys2/setup-msys2@v2
+      - uses: ElNounch/msys2-setup-action@v1
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
