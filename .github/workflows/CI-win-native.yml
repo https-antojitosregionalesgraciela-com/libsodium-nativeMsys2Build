@@ -8,7 +8,7 @@ jobs:
   native-build-windows:
     runs-on: windows-latest
     strategy:
-      fail-fast: $false
+      fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
     env:
