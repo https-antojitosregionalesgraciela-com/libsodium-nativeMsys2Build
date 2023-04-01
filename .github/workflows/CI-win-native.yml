@@ -4,6 +4,9 @@ on:
 #      - stable
 #      - next
 
+defaults:
+  run:
+    shell: msys2 {0}
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -28,8 +31,8 @@ jobs:
           del "R:\msys2-x86_64-latest.sfx.exe"
           "R:\msys64\msys2_shell.cmd" -no-start
           echo "R:\msys64\bin" >> $GITHUB_PATH
-          echo "R:\msys64\bin" >> $GITHUB_PATH
-      - name: msys2 - update base "/usr/bin"
+          echo "R:\msys64\usr\bin" >> $GITHUB_PATH
+      - name: msys2 - update base
         shell: cmd
         run: |
           @echo off
@@ -37,12 +40,8 @@ jobs:
           "R:\msys64\msys2_shell.cmd" "-no-start -c ""pacman -Sy && pacman --needed -S bash pacman pacman-mirrors msys2-runtime"""
           if ERRORLEVEL 1 GoTo Loop
       - name: msys2 update package database
-        shell: msys2 {0}
         run: pacman -Sy
       - name: msys2 - update base
-        shell: msys2 {0}
         run: pacman --needed -S bash pacman pacman-mirrors msys2-runtime
       - name: msys2 - install required packages
-        shell: msys2 {0}
-        run: |
-          pacman -S --needed gcc
+        run: pacman -S --needed gcc
