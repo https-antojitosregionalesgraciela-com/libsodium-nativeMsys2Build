@@ -21,6 +21,7 @@ jobs:
           install: autoconf
       - uses: actions/checkout@v3
       - name: CI-Build
+        shell: msys2_shell.cmd {0}
         run: |
           ./autogen.sh -s
           ./configure
