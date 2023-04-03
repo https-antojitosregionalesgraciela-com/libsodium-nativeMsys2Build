@@ -4,8 +4,8 @@ on:
 #      - stable
 #      - next
 
-env:
-  MSYS2_NOSTART: "yes"
+#env:
+#  MSYS2_NOSTART: "yes"
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -13,9 +13,12 @@ jobs:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
+    defaults:
+      shell: "msys2_shell.cmd -c '{0}'"
     steps:
       - uses: ElNounch/ramdrive@v1
-      - uses: ElNounch/msys2-setup-action@v1
+      - uses: ElNounch/msys2-setup-action@main
+        id: msys2-setup
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
@@ -23,7 +26,6 @@ jobs:
           install: autoconf
       - uses: actions/checkout@v3
       - name: CI-Build
-#        shell: msys2_shell.cmd {0}
         run: |
           ./autogen.sh -s
           ./configure
