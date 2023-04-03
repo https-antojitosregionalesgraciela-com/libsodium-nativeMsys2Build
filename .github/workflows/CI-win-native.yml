@@ -4,8 +4,6 @@ on:
 #      - stable
 #      - next
 
-env:
-  MSYS2_NOSTART: "yes"
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -16,15 +14,18 @@ jobs:
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
+        id: msys2-setup
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
+#          location: "C:\\elsewhere"
           update: true
-          install: autoconf
+          install: "autoconf automake libtool make gcc"
       - uses: actions/checkout@v3
+      - run: echo ${{ steps.msys2-setup.outputs.msys2_shell }}
       - name: CI-Build
-#        shell: msys2_shell.cmd {0}
+#        shell: "${{ steps.msys2-setup.outputs.msys2_shell }}" -f '{0}'
         run: |
-          ./autogen.sh -s
+          ./autogen.sh -f -o -s
           ./configure
           make && make check
