@@ -4,8 +4,6 @@ on:
 #      - stable
 #      - next
 
-#env:
-#  MSYS2_NOSTART: "yes"
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -14,7 +12,8 @@ jobs:
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
     defaults:
-      shell: "msys2_shell.cmd -c '{0}'"
+      steps:
+        shell: "msys2_shell.cmd -c '{0}'"
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@main
