@@ -12,7 +12,7 @@ jobs:
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
     defaults:
-      steps:
+      run:
         shell: "msys2_shell.cmd -c '{0}'"
     steps:
       - uses: ElNounch/ramdrive@v1
