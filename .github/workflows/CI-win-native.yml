@@ -16,7 +16,7 @@ jobs:
         shell: "msys2_shell.cmd -c '{0}'"
     steps:
       - uses: ElNounch/ramdrive@v1
-      - uses: ElNounch/msys2-setup-action@main
+      - uses: ElNounch/msys2-setup-action@v1
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
@@ -24,6 +24,7 @@ jobs:
           install: autoconf
       - uses: actions/checkout@v3
       - name: CI-Build
+        shell: "msys2_shell.cmd -c '{0}'"
         run: |
           ./autogen.sh -s
           ./configure
