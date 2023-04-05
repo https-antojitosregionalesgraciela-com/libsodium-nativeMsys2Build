@@ -15,11 +15,12 @@ jobs:
       run:
         shell: msys2_shell.cmd -f '{0}'
     steps:
-      - uses: ElNounch/ramdrive@v1
+#      - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
         with:
           msystem: ${{ matrix.system }}
-          location: "R:"
+#          location: "R:"
+          location: "C:\elsewhere"
           update: true
           install: autoconf
       - uses: actions/checkout@v3
