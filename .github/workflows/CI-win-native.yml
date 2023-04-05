@@ -22,10 +22,10 @@ jobs:
           location: "R:"
 #          location: "C:\\elsewhere"
           update: true
-          install: autoconf automake libtool
+          install: autoconf automake libtool make gcc
       - uses: actions/checkout@v3
       - name: CI-Build
         run: |
-          ./autogen.sh -f -o
+          ./autogen.sh -f -o -s
           ./configure
           make && make check
