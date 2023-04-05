@@ -15,21 +15,14 @@ jobs:
       run:
         shell: msys2_shell.cmd -f '{0}'
     steps:
-#      - uses: ElNounch/ramdrive@v1
-#      - name: "Creating ramdisk"
-#        shell: powershell
-#        run: |
-#          Start-BitsTransfer "http://static.ltr-data.se/files/imdiskinst.exe" "$($env:TEMP)\imdiskinst.exe"
-#          Start-Process -Wait "$($env:TEMP)\imdiskinst.exe"
-#          Start-Process -Wait "imdisk" -ArgumentList "-a -s 3G -m R: -p ""/fs:ntfs /q /y"""
-#          Remove-Item "$($env:TEMP)\imdiskinst.exe"
+      - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
         with:
           msystem: ${{ matrix.system }}
-#          location: "R:"
-          location: "C:\\elsewhere"
+          location: "R:"
+#          location: "C:\\elsewhere"
           update: true
-          install: autoconf
+          install: autoconf libtool
       - uses: actions/checkout@v3
       - name: CI-Build
         run: |
