@@ -26,6 +26,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: CI-Build
         run: |
-          ./autogen.sh -s
+          ./autogen.sh -f -o
           ./configure
           make && make check
