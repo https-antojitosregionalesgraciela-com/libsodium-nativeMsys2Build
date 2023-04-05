@@ -20,7 +20,7 @@ jobs:
         with:
           msystem: ${{ matrix.system }}
 #          location: "R:"
-          location: "C:\elsewhere"
+          location: "C:\\elsewhere"
           update: true
           install: autoconf
       - uses: actions/checkout@v3
