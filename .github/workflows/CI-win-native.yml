@@ -24,7 +24,7 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: CI-Build
-        shell: ${{ env.MSYS2_SHELL }} -f '{0}'
+        shell: ${{ runs.steps.env.MSYS2_SHELL }} -f '{0}'
         run: |
           ./autogen.sh -f -o -s
           ./configure
