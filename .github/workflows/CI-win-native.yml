@@ -22,7 +22,6 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - uses: actions/checkout@v3
-      - run: echo ${{ step.msys2-setup.outputs.msys2_shell }}
       - name: CI-Build
         shell: ${{steps.msys2.outputs.msys2_shell}} -f '{0}'
         run: |
