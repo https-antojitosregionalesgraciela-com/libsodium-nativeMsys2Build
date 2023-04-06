@@ -13,7 +13,7 @@ jobs:
         system: [ 'UCRT64', 'MINGW64' ]
     defaults:
       run:
-        shell: msys2_shell.cmd -f '{0}'
+        shell: ${{ steps.msys2-setup.outputs.msys2_shell }}
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
