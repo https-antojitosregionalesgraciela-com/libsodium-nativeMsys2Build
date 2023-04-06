@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo ${{ steps.msys2-setup.outputs.msys2_shell }}
       - name: CI-Build
-        shell: "${{ steps.msys2.outputs.msys2_shell }} -f {0}"
+        shell: ${{steps.msys2.outputs.msys2_shell}} -f '{0}'
         run: |
           ./autogen.sh -f -o -s
           ./configure
