@@ -6,7 +6,7 @@ on:
 
 defaults:
   run:
-    shell: ${{ github.env.MSYS2_SHELL }}
+    shell: ${{ env.MSYS2_SHELL }}
 
 jobs:
   native-build-windows:
