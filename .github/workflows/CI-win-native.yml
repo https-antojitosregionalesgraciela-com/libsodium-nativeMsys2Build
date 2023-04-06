@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
-        id: msys2-setup
+        id: msys2
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
@@ -23,7 +23,7 @@ jobs:
           install: "autoconf automake libtool make gcc"
       - uses: actions/checkout@v3
       - name: CI-Build
-        shell: "${{ steps.msys2-setup.outputs.msys2_shell }} -f '{0}'"
+        shell: "${{ steps.msys2.outputs.msys2_shell }} -f '{0}'"
         run: |
           ./autogen.sh -f -o -s
           ./configure
