@@ -4,6 +4,9 @@ on:
 #      - stable
 #      - next
 
+env:
+  MSYS2_SHELL: ""
+
 defaults:
   run:
     shell: ${{ env.MSYS2_SHELL }}
