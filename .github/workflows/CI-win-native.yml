@@ -11,6 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
+    defaults:
+      run:
+        shell: ""
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
@@ -18,13 +21,12 @@ jobs:
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
-#          location: "C:\\elsewhere"
           update: true
           install: "autoconf automake libtool make gcc"
-      - uses: actions/checkout@v3
       - name: CI-Build
-        shell: ${{steps.msys2.outputs.msys2_shell}} -f '{0}'
+        shell: ${{ env.MSYS2_SHELL }} -f '{0}'
         run: |
           ./autogen.sh -f -o -s
           ./configure
           make && make check
+
