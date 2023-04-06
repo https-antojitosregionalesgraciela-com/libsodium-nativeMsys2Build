@@ -18,12 +18,11 @@ jobs:
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
-#          location: "C:\\elsewhere"
           update: true
           install: "autoconf automake libtool make gcc"
       - uses: actions/checkout@v3
       - name: CI-Build
-        shell: "${{ steps.msys2.outputs.msys2_shell }} -f {0}"
+        shell: "${{ step.msys2.outputs.msys2_shell }} -f {0}"
         run: |
           ./autogen.sh -f -o -s
           ./configure
