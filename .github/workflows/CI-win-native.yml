@@ -17,6 +17,7 @@ jobs:
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
+        id: msys2-setup
         with:
           msystem: ${{ matrix.system }}
           location: "R:"
