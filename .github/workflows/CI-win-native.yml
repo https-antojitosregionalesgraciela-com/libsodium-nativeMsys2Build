@@ -4,6 +4,10 @@ on:
 #      - stable
 #      - next
 
+defaults:
+  run:
+    shell: ${{ github.env.MSYS2_SHELL }}
+
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -21,7 +25,6 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: CI-Build
-        shell: ${{ github.env.MSYS2_SHELL }}
         run: |
           ./autogen.sh -f -o -s
           ./configure
