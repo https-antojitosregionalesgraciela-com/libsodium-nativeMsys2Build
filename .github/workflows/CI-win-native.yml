@@ -19,7 +19,7 @@ jobs:
       - uses: ElNounch/msys2-setup-action@v1
         id: msys2
         with:
-          msystem: ${{ matrix.system }}
+          msystem: "${{ matrix.system }}"
           location: "R:"
           update: true
           install: "autoconf automake libtool make gcc"
@@ -29,4 +29,3 @@ jobs:
           ./autogen.sh -f -o -s
           ./configure
           make && make check
-
