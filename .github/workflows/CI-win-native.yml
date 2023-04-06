@@ -9,7 +9,7 @@ env:
 
 defaults:
   run:
-    shell: ${{ MSYS2_SHELL }}
+    shell: $MSYS2_SHELL
 
 jobs:
   native-build-windows:
