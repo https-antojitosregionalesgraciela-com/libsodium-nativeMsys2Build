@@ -11,9 +11,6 @@ jobs:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
-    defaults:
-      run:
-        shell: "msysgw64.cmd -f'{0}'"
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
