@@ -4,13 +4,6 @@ on:
 #      - stable
 #      - next
 
-env:
-  MSYS2_SHELL: ""
-
-defaults:
-  run:
-    shell: ${{ env.MSYS2_SHELL }}
-
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -27,6 +20,8 @@ jobs:
           location: "R:"
           update: true
           install: "autoconf automake libtool make gcc"
+      - name: set default shell
+        run: defaults.run.shell = steps.msys2.outputs.msys2_shell
       - name: CI-Build
         run: |
           ./autogen.sh -f -o -s
