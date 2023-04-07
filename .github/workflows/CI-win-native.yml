@@ -25,7 +25,7 @@ jobs:
       - name: Set msys2_shell env
         run: echo "msys2_shell=${{ steps.msys2.outputs.msys2_shell }}" >> $GITHUB_ENV
       - name: CI-Build
-        shell: ${{ env.msys2_shell }}
+        shell: ${{ $msys2_shell }}
         run: |
           ./autogen.sh -f -o -s
           ./configure
