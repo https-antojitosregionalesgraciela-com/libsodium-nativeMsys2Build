@@ -12,7 +12,7 @@ jobs:
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
     env:
-      msys2_shell: ""
+      MSYS2_SHELL: ""
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
@@ -23,7 +23,7 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: CI-Build
-        shell: "${{ $MSYS2_SHELL }}"
+        shell: "${{ env.MSYS2_SHELL }}"
         run: |
           ./autogen.sh -f -o -s
           ./configure
