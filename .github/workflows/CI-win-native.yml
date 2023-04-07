@@ -4,9 +4,6 @@ on:
 #      - stable
 #      - next
 
-env:
-  MSYS2_SHELL: ${{ steps.msys2.outputs.msys2_shell }}
-
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -14,6 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
+    env:
+      MSYS2_SHELL: ${{ steps.msys2.outputs.msys2_shell }}
     defaults:
       run:
         shell: ${{ env.MSYS2_SHELL }}
