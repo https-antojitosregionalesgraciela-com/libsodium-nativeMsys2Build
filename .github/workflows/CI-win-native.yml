@@ -21,7 +21,7 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: set default shell
-        run: defaults.run.shell = steps.msys2.outputs.msys2_shell
+        run: jobs.defaults.run.shell = steps.msys2.outputs.msys2_shell
       - name: CI-Build
         run: |
           ./autogen.sh -f -o -s
