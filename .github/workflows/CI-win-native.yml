@@ -3,22 +3,43 @@ on:
 
 jobs:
   native-build-windows:
-    runs-on: windows-latest
+    runs-on: 'windows-latest'
     strategy:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
+    defaults:
+      run:
+        shell: "dynamic_shell_action.cmd -f {0}"
     steps:
-      - uses: ElNounch/ramdrive@v1
-      - uses: ElNounch/msys2-setup-action@v1
-        id: msys2-setup
+      - name: "Ramdisk setup to R:"
+        uses: 'ElNounch/ramdrive@main'
+        with:
+          drive: 'R'
+          size: '1GB'
+      - uses: 'ElNounch/msys2-setup-action@main'
+        id: 'msys2'
         with:
           msystem: "${{ matrix.system }}"
           location: "R:"
           update: true
           install: "autoconf automake libtool make gcc"
-      - name: CI-Build
-        shell: ${{ steps.msys2.output.msys2_shell }} -f {0}
+      - name: "Msys2 as default shell"
+        shell: pwsh
+        run: |
+          @'
+          @echo off
+          set ARGS=${{ steps.msys2.outputs.msys2_shell_args }}
+          :Loop
+          if "%~1" == "" GoTo Done
+          set ARGS=%ARGS%,'%~1'
+          shift
+          GoTo Loop
+          :Done
+          powershell -Command "& {Start-Process -NoNewWindow -Wait -FilePath ${{ steps.msys2.outputs.msys2_shell_cmd }} -ArgumentList $( %ARGS% )}"
+          '@>"${env:WINDIR}\dynamic_shell_action.cmd"
+      - uses: actions/checkout@v3
+      - name: Generate configurator
         run: |
           ./autogen.sh -f -o -s
           ./configure
