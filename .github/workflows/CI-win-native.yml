@@ -21,8 +21,10 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: "CI-Build"
-        shell: ${{steps.msys2.outputs.msys2_shell}}
+        shell: cmd
         run: |
+          type <<EOT | ${{ format(steps.msys2.outputs.msys2_shell, '-') }}
           ./autogen.sh -f -o -s
           ./configure
           make && make check
+          EOT
