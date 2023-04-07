@@ -20,8 +20,8 @@ jobs:
           location: "R:"
           update: true
           install: "autoconf automake libtool make gcc"
-      - name: CI-Build
-        shell: ${{ steps.msys2.outputs.msys2_shell }}
+      - name: "CI-Build"
+        shell: "${{ steps.msys2.outputs.msys2_shell }}"
         run: |
           ./autogen.sh -f -o -s
           ./configure
