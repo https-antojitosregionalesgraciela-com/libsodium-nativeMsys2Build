@@ -5,7 +5,7 @@ on:
 #      - next
 
 env:
-  MSYS2_SHELL: ''
+  MSYS2_SHELL: ${{ steps.msys2.outputs.msys2_shell }}
 
 jobs:
   native-build-windows:
@@ -16,7 +16,7 @@ jobs:
         system: [ 'UCRT64', 'MINGW64' ]
     defaults:
       run:
-        shell: ${{ steps.msys2.outputs.msys2_shell }}
+        shell: ${{ env.MSYS2_SHELL }}
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
