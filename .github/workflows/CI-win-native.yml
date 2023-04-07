@@ -22,10 +22,8 @@ jobs:
           location: "R:"
           update: true
           install: "autoconf automake libtool make gcc"
-      - name: Set msys2_shell env
-        run: echo "msys2_shell=${{ steps.msys2.outputs.msys2_shell }}" >> $GITHUB_ENV
       - name: CI-Build
-        shell: ${{ msys2_shell }}
+        shell: "${{ $MSYS2_SHELL }}"
         run: |
           ./autogen.sh -f -o -s
           ./configure
