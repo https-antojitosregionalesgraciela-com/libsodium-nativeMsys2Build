@@ -1,8 +1,5 @@
 on:
-  push:
-#    branches:
-#      - stable
-#      - next
+  push
 
 jobs:
   native-build-windows:
@@ -24,9 +21,8 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: CI-Build
-        shell: ${{ steps.msys2.env.MSYS2_SHELL }} -f '{0}'
+        shell: ${{ steps.msys2.output.msys2_shell }} -f {0}
         run: |
           ./autogen.sh -f -o -s
           ./configure
           make && make check
-
