@@ -12,7 +12,7 @@ jobs:
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
     env:
-      msys2_shell: ${{ steps.msys2.outputs.msys2_shell }}
+      msys2_shell: ""
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
@@ -22,6 +22,8 @@ jobs:
           location: "R:"
           update: true
           install: "autoconf automake libtool make gcc"
+      - name: Set msys2_shell env
+        run: echo "msys2_shell=${{ steps.msys2.outputs.msys2_shell }}" >> $GITHUB_ENV
       - name: CI-Build
         shell: ${{ env.msys2_shell }}
         run: |
