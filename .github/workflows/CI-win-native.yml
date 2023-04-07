@@ -4,6 +4,9 @@ on:
 #      - stable
 #      - next
 
+env:
+  MSYS2_SHELL: ''
+
 jobs:
   native-build-windows:
     runs-on: windows-latest
@@ -11,6 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         system: [ 'UCRT64', 'MINGW64' ]
+    defaults:
+      run:
+        shell: ${{ env.MSYS2_SHELL }}
     steps:
       - uses: ElNounch/ramdrive@v1
       - uses: ElNounch/msys2-setup-action@v1
@@ -21,7 +27,7 @@ jobs:
           update: true
           install: "autoconf automake libtool make gcc"
       - name: set default shell
-        run: jobs.defaults.run.shell = steps.msys2.outputs.msys2_shell
+        run: env.MSYS2_SHELL = ${{ steps.msys2.outputs.msys2_shell }}
       - name: CI-Build
         run: |
           ./autogen.sh -f -o -s
