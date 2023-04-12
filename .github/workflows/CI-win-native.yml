@@ -40,8 +40,12 @@ jobs:
           exit %ERRORLEVEL%
           '@>"${env:WINDIR}\dynamic_shell_action.cmd"
       - uses: actions/checkout@v3
-      - name: Generate configurator
+      - name: Generate configure
         run: |
           ./autogen.sh -f -o -s
+      - name: Call configure
+        run: |
           ./configure
+      - name: Make and check
+        run: |
           make && make check
