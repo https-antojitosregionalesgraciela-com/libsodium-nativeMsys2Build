@@ -11,8 +11,6 @@ jobs:
     defaults:
       run:
         shell: "dynamic_shell_action.cmd -f {0}"
-    env:
-      CPPFLAGS: "-DDEV_MODE=1"
     steps:
       - name: "Ramdisk setup to R:"
         uses: 'ElNounch/ramdrive@v1'
@@ -47,7 +45,7 @@ jobs:
           ./autogen.sh -f -o -s
       - name: Call configure
         run: |
-          ./configure
+          ./configure CPPFLAGS='-DDEV_MODE=1'
       - name: Make and check
         run: |
           make && make check
