@@ -12,11 +12,6 @@ jobs:
       run:
         shell: "dynamic_shell_action.cmd -f {0}"
     steps:
-      - name: "Full Steam AHEAD !!!"
-        shell: cmd
-        run: |
-          powercfg /list
-          powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
       - name: "Ramdisk setup to R:"
         uses: 'ElNounch/ramdrive@v1'
         with:
