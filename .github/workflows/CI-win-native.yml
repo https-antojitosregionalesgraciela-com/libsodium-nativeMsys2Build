@@ -36,7 +36,7 @@ jobs:
           shift
           GoTo Loop
           :Done
-          powershell -Command "& {(Start-Process -NoNewWindow -Wait -FilePath ${{ steps.msys2.outputs.msys2_shell_cmd }} -ArgumentList $( %ARGS% )).ExitCode}"
+          powershell -Command "& {Exit $(Start-Process -NoNewWindow -Wait -FilePath ${{ steps.msys2.outputs.msys2_shell_cmd }} -ArgumentList $( %ARGS% )).ExitCode}"
           exit %ERRORLEVEL%
           '@>"${env:WINDIR}\dynamic_shell_action.cmd"
       - uses: actions/checkout@v3
