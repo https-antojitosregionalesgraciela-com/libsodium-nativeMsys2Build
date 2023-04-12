@@ -15,7 +15,7 @@ jobs:
       - name: "Full Steam AHEAD !!!"
         shell: cmd
         run: |
-          powercfg /getactive
+          powercfg /list
           powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
       - name: "Ramdisk setup to R:"
         uses: 'ElNounch/ramdrive@v1'
@@ -28,7 +28,7 @@ jobs:
           msystem: "${{ matrix.system }}"
           location: "R:"
           update: true
-          install: "autogen toolchain libtool"
+          install: "autogen base-devel"
       - name: "Msys2 as default shell"
         shell: pwsh
         run: |
