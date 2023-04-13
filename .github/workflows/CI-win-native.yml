@@ -23,7 +23,7 @@ jobs:
           msystem: "${{ matrix.system }}"
           location: "R:"
           update: true
-          install: "${MINGW_PACKAGE_PREFIX}-autotools autogen"
+          install: "${env:MINGW_PACKAGE_PREFIX}-autotools autogen"
       - name: "Msys2 as default shell"
         shell: pwsh
         run: |
