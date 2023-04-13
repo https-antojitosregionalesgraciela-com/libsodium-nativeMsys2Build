@@ -21,9 +21,9 @@ jobs:
         id: 'msys2'
         with:
           msystem: "${{ matrix.system }}"
-          location: "R:"
+          location: 'R:'
           update: true
-          install: autogen"
+          install: 'autogen'
       - name: "Msys2 as default shell"
         shell: pwsh
         run: |
