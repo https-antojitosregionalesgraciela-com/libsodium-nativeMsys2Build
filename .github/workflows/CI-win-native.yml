@@ -17,7 +17,7 @@ jobs:
         with:
           drive: 'R'
           size: '1GB'
-      - uses: 'ElNounch/msys2-setup-action@v1'
+      - uses: 'ElNounch/msys2-setup-action@main'
         id: 'msys2'
         with:
           msystem: "${{ matrix.system }}"
