@@ -23,7 +23,7 @@ jobs:
           msystem: "${{ matrix.system }}"
           location: 'R:'
           update: true
-          install: 'autotools libtool chaintool'
+          install: 'autotools libtool'
       - name: "Msys2 as default shell"
         shell: pwsh
         run: |
