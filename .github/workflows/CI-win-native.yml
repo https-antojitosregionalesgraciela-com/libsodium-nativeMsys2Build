@@ -12,18 +12,19 @@ jobs:
       run:
         shell: "dynamic_shell_action.cmd -f {0}"
     steps:
-      - name: "Ramdisk setup to R:"
-        uses: 'ElNounch/ramdrive@v1'
-        with:
-          drive: 'R'
-          size: '1GB'
+#      - name: "Ramdisk setup to R:"
+#        uses: 'ElNounch/ramdrive@v1'
+#        with:
+#          drive: 'R'
+#          size: '1GB'
       - uses: 'ElNounch/msys2-setup-action@main'
         id: 'msys2'
         with:
           msystem: "${{ matrix.system }}"
-          location: 'R:'
+          location: 'D:'
           update: true
-          install: 'autotools libtool'
+          install_generic: ''
+          install_msystem: 'autotools''
       - name: "Msys2 as default shell"
         shell: pwsh
         run: |
