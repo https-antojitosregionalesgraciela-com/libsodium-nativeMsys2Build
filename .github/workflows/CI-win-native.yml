@@ -20,7 +20,7 @@ jobs:
           update: true
           install_generic: ''
           install_msystem: 'autotools'
-        shell: pwsh
+      - shell: pwsh
         run: |
           @'
           @echo off
