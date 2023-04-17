@@ -20,11 +20,10 @@ jobs:
           update: true
           install_generic: ''
           install_msystem: 'autotools'
-##      - name: "Msys2 as default shell"
         shell: pwsh
-#        run: |
-#          @'
-#          @echo off
+        run: |
+          @'
+          @echo off
           set ARGS=${{ steps.msys2.outputs.msys2_shell_args }}
           :Loop
           if "%~1" == "" GoTo Done
