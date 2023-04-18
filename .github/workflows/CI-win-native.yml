@@ -19,7 +19,7 @@ jobs:
           location: 'D:'
           update: true
           install_generic: ''
-          install_msystem: 'autotools'
+          install_msystem: 'autotools toolchain'
       - shell: pwsh
         run: |
           @'
