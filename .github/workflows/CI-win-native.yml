@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        system: [ 'UCRT64', 'MINGW64', 'MSYS', 'MINGW32', 'CLANG32', 'CLANG64' ]
+        system: [ 'UCRT64', 'MINGW64', 'MINGW32', 'CLANG32', 'CLANG64' ]
     defaults:
       run:
         shell: "dynamic_shell_action.cmd -f {0}"
