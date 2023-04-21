@@ -16,7 +16,6 @@ jobs:
         id: 'msys2'
         with:
           msystem: "${{ matrix.system }}"
-          location: 'D:'
           install_generic: ''
           install_msystem: 'autotools toolchain'
       - uses: actions/checkout@v3
